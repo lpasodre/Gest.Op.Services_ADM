@@ -49,7 +49,9 @@
     .customers-wrap{display:grid;grid-template-columns:230px 1fr;gap:10px;align-items:start}
     .customer-line,.delivery-line,.ready-list,.ticket-list{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start;min-height:92px}
     .queue-strip{min-height:128px;padding:8px;border:2px dashed rgba(255,255,255,.18);border-radius:8px;background:rgba(0,0,0,.11)}
-    .customer{width:96px;min-height:122px;position:relative;text-align:center;padding-top:36px;border:2px solid transparent;border-radius:10px;background:rgba(255,255,255,.03)}
+    .customer{width:108px;min-height:126px;position:relative;text-align:center;padding-top:36px;border:2px solid transparent;border-radius:10px;background:rgba(255,255,255,.03)}
+    .delivery-line .customer{width:168px;min-height:154px;padding-top:42px;cursor:pointer;background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.15)}
+    .delivery-line .customer .bubble{min-width:122px;max-width:154px}
     .customer.drop-hover{border-color:#fff;background:rgba(255,255,255,.12)}
     .bubble{position:absolute;top:0;left:50%;transform:translateX(-50%);min-width:84px;max-width:116px;padding:4px 5px;background:#fffbe8;color:#21170c;border:2px solid var(--dark);border-radius:9px;font-size:10px;line-height:1.12;z-index:2;box-shadow:0 2px 0 var(--dark)}
     .bubble:after{content:"";position:absolute;bottom:-8px;left:45%;border:6px solid transparent;border-top-color:var(--dark)}
@@ -59,12 +61,12 @@
     .counter-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:10px}.counter-box{background:rgba(0,0,0,.14);border:2px dashed rgba(255,255,255,.18);border-radius:8px;padding:8px;min-height:162px}.counter-box h3{margin:0 0 6px;color:#fff;font-size:13px}
     .ticket,.ready-order{background:#fff7d7;color:#241707;border:3px solid var(--dark);border-radius:8px;box-shadow:0 3px 0 var(--dark);padding:8px;min-width:132px;max-width:190px;font-size:12px;position:relative}.ticket button{margin-top:6px;width:100%;padding:6px}.ticket.wait-warn{background:#ffe1a3}.ticket.wait-bad{background:#ffb7b7}.order-no{display:inline-block;background:#101824;color:#fff;border:2px solid var(--dark);border-radius:7px;padding:2px 5px;margin-bottom:4px}.ready-order{cursor:grab;background:#d7fff0}.ready-order.selected{outline:4px solid #fff}.ready-order.auto{background:#dff2ff}.tag{display:inline-block;border:2px solid var(--dark);border-radius:999px;padding:2px 6px;font-size:10px;background:#fff;color:#111;margin-top:4px}.tag.warn{background:#fff1ad}.tag.good{background:#baf7ca}.tag.bad{background:#ffb5b5}
     .production-grid{display:grid;grid-template-columns:minmax(230px,.9fr) minmax(280px,1.1fr);gap:10px}.fryer{background:#3a2d2a;border:3px solid var(--dark);border-radius:9px;padding:8px;margin-bottom:8px}.fryer h3{margin:0 0 7px 0;color:#ffdf91;font-size:13px}.slots{display:grid;grid-template-columns:repeat(auto-fit,minmax(72px,1fr));gap:6px}.slot{position:relative;min-height:76px;background:#161a24;border:3px solid var(--dark);border-radius:8px;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;font-size:11px;color:#dce6f0}.slot .progress{position:absolute;left:0;bottom:0;height:7px;background:var(--good);width:0}.slot.ready{background:#244b31;animation:pulse .65s infinite alternate}@keyframes pulse{from{filter:brightness(1)}to{filter:brightness(1.35)}}
-    .management-row{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:12px;margin-top:12px}.stock-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stock-item{background:var(--panel2);border:2px solid var(--dark);border-radius:8px;padding:8px;text-align:center}.stock-item.low{background:#5d2b2f}.stock-item.warn{background:#5f4a24}.stock-cap{font-size:10px;color:var(--muted)}.log-box{height:160px;overflow:auto;background:#101824;border:2px inset #3d5878;border-radius:7px;padding:8px;font-size:11px}.log-line{margin-bottom:5px}.log-good{color:var(--good)}.log-bad{color:var(--bad)}.log-warn{color:var(--warn)}
+    .management-row{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:12px;margin-top:12px}.stock-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stock-item{background:var(--panel2);border:2px solid var(--dark);border-radius:8px;padding:8px;text-align:left}.stock-item.low{background:#5d2b2f}.stock-item.warn{background:#5f4a24}.stock-cap{font-size:10px;color:var(--muted)}.stockbar{display:flex;height:13px;border:2px solid var(--dark);border-radius:7px;overflow:hidden;background:#192234;margin:6px 0}.bar-available{background:var(--good)}.bar-reserved{background:var(--accent)}.bar-free{background:#5b6475}.stock-legend{font-size:9px;line-height:1.35;color:#fff8ce}.stock-numbers{font-size:11px;line-height:1.35}.log-box{height:160px;overflow:auto;background:#101824;border:2px inset #3d5878;border-radius:7px;padding:8px;font-size:11px}.log-line{margin-bottom:5px}.log-good{color:var(--good)}.log-bad{color:var(--bad)}.log-warn{color:var(--warn)}
     .modal-wrap{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:flex-start;justify-content:center;padding:18px;z-index:20;overflow:auto}.modal-wrap.show{display:flex}.modal{width:min(1200px,96vw);padding:16px;background:#253550}.modal h2{margin:0 0 10px;color:var(--accent)}.report-grid,.upgrade-grid,.history-grid,.stock-buy-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.report-item,.upgrade,.history-item,.buy-card{background:var(--panel2);border:2px solid var(--dark);border-radius:8px;padding:10px}.report-item .value{font-size:16px}.diagnostic{line-height:1.45;font-size:13px}.cash-banner{margin:10px 0 12px;padding:12px;border:3px solid var(--dark);border-radius:10px;background:linear-gradient(90deg,#1f5835,#2e7d4c);font-size:22px;font-weight:bold;text-align:center;box-shadow:0 3px 0 var(--dark)}.buy-card h3,.upgrade h3{margin:0 0 5px;color:#fff;font-size:14px}.buy-card p,.upgrade p{margin:0 0 8px;color:var(--muted);font-size:11px;line-height:1.3}.buy-controls{display:grid;grid-template-columns:1fr 1fr;gap:6px}.buy-controls input{width:100%;font-family:"Courier New",monospace;padding:7px;border:2px solid var(--dark);border-radius:7px}.cost-preview{margin-top:7px;padding:7px;border:2px dashed rgba(255,255,255,.25);border-radius:7px;background:rgba(0,0,0,.16);font-size:11px;line-height:1.35}.print-area{display:none}.priority-high{border-color:#ff6b6b;background:#513545}.priority-medium{border-color:#ffcc4d}.priority-low{opacity:.88}.hidden{display:none!important}.footer-note{margin-top:10px;text-align:center;color:var(--muted);font-size:11px}
 
-    .config-bar{display:grid;grid-template-columns:1.4fr .8fr 1.8fr;gap:10px;align-items:end;margin-bottom:12px;padding:12px}
+    .config-bar{display:grid;grid-template-columns:1.2fr .65fr 1fr 1.6fr;gap:10px;align-items:end;margin-bottom:12px;padding:12px}
     .field label{display:block;font-size:10px;color:var(--muted);text-transform:uppercase;margin-bottom:4px}
-    .field input{width:100%;font-family:"Courier New",monospace;border:3px solid var(--dark);border-radius:8px;padding:8px;background:#fff;color:#111;font-weight:bold}
+    .field input,.field select{width:100%;font-family:"Courier New",monospace;border:3px solid var(--dark);border-radius:8px;padding:8px;background:#fff;color:#111;font-weight:bold}
     .price-effect{background:rgba(0,0,0,.16);border:2px dashed rgba(255,255,255,.22);border-radius:8px;padding:8px;font-size:11px;color:#fff8ce;line-height:1.35}
     @media(max-width:1180px){.hud{grid-template-columns:repeat(3,1fr)}.management-row{grid-template-columns:1fr}.report-grid,.upgrade-grid,.history-grid,.stock-buy-grid{grid-template-columns:repeat(2,1fr)}.subtitle{display:none}}
     @media(max-width:760px){.top-row,.bottom-row,.production-grid,.counter-grid,.customers-wrap,.config-bar{grid-template-columns:1fr}}
@@ -77,6 +79,12 @@
   <div class="titlebar">
     <h1>🥟 Pastelaria em Operação</h1>
     <div class="subtitle">Simulador 16-bit de Gestão de Operações: fila, capacidade, sequenciamento, estoque, desperdício, custo e satisfação.</div>
+  </div>
+  <div class="config-bar panel">
+    <div class="field"><label for="shopNameInput">Nome da pastelaria</label><input id="shopNameInput" maxlength="40" value="Pastelaria do Vale" placeholder="Digite o nome da pastelaria"></div>
+    <div class="field"><label for="pastelPriceInput">Preço do pastel</label><input id="pastelPriceInput" type="number" min="7" max="15" step="1" value="10"></div>
+    <div class="field"><label for="performanceFocusInput">Prioridade do ciclo</label><select id="performanceFocusInput"><option value="custo">Custo</option><option value="rapidez">Rapidez</option><option value="confiabilidade">Confiabilidade</option><option value="qualidade">Qualidade</option><option value="flexibilidade">Flexibilidade</option></select></div>
+    <div class="price-effect" id="priceEffectText">Preço médio: boa demanda, boa satisfação e margem equilibrada.</div>
   </div>
   <div class="hud">
     <div class="card"><div class="label">Ciclo</div><div class="value" id="cycleValue">1</div></div>
@@ -94,11 +102,6 @@
     <button id="endBtn" class="btn-warn" disabled>■ Encerrar ciclo e ver relatório</button>
     <button id="resetBtn" class="btn-danger">↻ Resetar jogo</button>
     <button id="historyBtn" class="btn-blue">📊 Histórico</button>
-  </div>
-  <div class="config-bar panel">
-    <div class="field"><label for="shopNameInput">Nome da pastelaria</label><input id="shopNameInput" maxlength="40" value="Pastelaria do Vale" placeholder="Digite o nome da pastelaria"></div>
-    <div class="field"><label for="pastelPriceInput">Preço do pastel</label><input id="pastelPriceInput" type="number" min="7" max="15" step="1" value="10"></div>
-    <div class="price-effect" id="priceEffectText">Preço médio: boa demanda, boa satisfação e margem equilibrada.</div>
   </div>
   <div class="op-layout">
     <div class="top-row">
@@ -124,7 +127,7 @@
             <button id="btnCarne">Carne</button><button id="btnFrango">Frango</button><button id="btnQueijo">Queijo</button>
           </div>
           <div class="btn-row">
-            <button id="btnDrink">+ Suco/Refrigerante</button><button id="btnClear">Limpar</button><button id="btnFinalize" class="btn-primary">Finalizar</button>
+            <button id="btnDrink">+ Suco/Refrigerante</button><button id="btnClear">Limpar</button><button id="btnReject" class="btn-danger">Recusar pedido</button><button id="btnFinalize" class="btn-primary">Finalizar</button>
           </div>
         </div>
         <div class="tiny">Tempos de fritura: queijo 16s, frango 20s e carne 24s. O refrigerante/suco não vai para a fritadeira.</div>
@@ -133,7 +136,7 @@
     <div class="bottom-row">
       <section class="panel">
         <h2>3. Balcão de entrega</h2>
-        <div class="hint">Arraste a bandeja para o cliente correto ou toque na bandeja e depois no cliente. Se houver auxiliar, ele entrega metade dos pedidos automaticamente.</div>
+        <div class="hint">Arraste a bandeja para qualquer área do cartão do cliente correto ou toque na bandeja e depois no cartão do cliente. O jogo não indica o cliente certo: confira o número da comanda.</div>
         <div class="counter-grid">
           <div class="counter-box">
             <h3>Clientes aguardando entrega</h3>
@@ -171,7 +174,7 @@
     </section>
     <section class="panel">
       <h2>Conceitos em jogo</h2>
-      <div class="tiny"><b>Capacidade:</b> limite da fritadeira e da equipe.<br><b>Sequenciamento:</b> escolher o que produzir primeiro.<br><b>Estoque:</b> comprar com caixa limitado e capacidade máxima.<br><b>Desperdício:</b> comprar demais pode gerar perda de 20%.<br><b>Gargalo:</b> fila acumulada em atendimento, produção ou entrega.<br><br><b>Sistema desenvolvido para a disciplina Gestão de Operações e Serviços, Professor Me. Luan Sodré da UNIVALE.</b></div>
+      <div class="tiny"><b>Capacidade:</b> limite da fritadeira e da equipe.<br><b>Sequenciamento:</b> escolher o que produzir primeiro.<br><b>Estoque:</b> comprar com caixa limitado e capacidade máxima.<br><b>Desperdício:</b> comprar demais pode gerar perda de 20%.<br><b>Gargalo:</b> fila acumulada em atendimento, produção ou entrega.<br><b>Objetivos de desempenho:</b> custo, rapidez, confiabilidade, qualidade e flexibilidade aparecem nos indicadores do relatório.<br><br><b>Sistema desenvolvido para a disciplina Gestão de Operações e Serviços, Professor Me. Luan Sodré da UNIVALE.</b></div>
     </section>
   </div>
   <div class="footer-note">Sistema desenvolvido para a disciplina Gestão de Operações e Serviços, Professor Me. Luan Sodré da UNIVALE.</div>
@@ -185,10 +188,9 @@
     <div class="panel" style="margin-top:12px"><h2>Diagnóstico gerencial</h2><div id="diagnosticText" class="diagnostic"></div></div>
     <h2>Compras e melhorias para o próximo ciclo</h2>
     <div class="cash-banner" id="cashBanner">CAIXA DISPONÍVEL: R$ 0,00</div>
-    <div class="panel"><h2>Preço do pastel para o próximo ciclo</h2><div class="tiny">O preço altera demanda, margem e sensibilidade da satisfação. Preço barato atrai mais clientes, mas reduz percepção de valor; preço caro reduz demanda e aumenta a exigência do cliente.</div><div class="config-bar" style="margin:8px 0 0;box-shadow:none;border-width:2px"><div class="field"><label for="modalPastelPriceInput">Preço do pastel</label><input id="modalPastelPriceInput" type="number" min="7" max="15" step="1" value="10"></div><div class="price-effect" id="modalPriceEffectText" style="grid-column:span 2">Preço médio: boa demanda, boa satisfação e margem equilibrada.</div></div></div>
+    <div class="panel"><h2>Melhorias operacionais</h2><div class="tiny">Amplie a capacidade de estoque antes de comprar materiais, se precisar comportar mais unidades.</div><div class="upgrade-grid" id="upgradeGrid"></div></div>
     <div class="panel"><h2>Compra de materiais</h2><div class="tiny">Escolha a quantidade. O estoque é limitado pela capacidade atual. Para comprar mais, amplie a capacidade de estoque.</div><div class="stock-buy-grid" id="stockBuyGrid"></div></div>
-    <div class="panel"><h2>Melhorias operacionais</h2><div class="upgrade-grid" id="upgradeGrid"></div></div>
-    <div class="btn-row" style="margin-top:14px"><button id="nextCycleBtn" class="btn-primary">▶ Iniciar próximo ciclo</button><button id="printReportBtn" class="btn-blue">🖨 Imprimir / salvar em PDF</button><button id="closeReportBtn">Fechar relatório</button></div>
+    <div class="btn-row" style="margin-top:14px"><button id="nextCycleBtn" class="btn-primary">↩ Fechar para ajustar e iniciar próximo ciclo</button><button id="printReportBtn" class="btn-blue">🖨 Imprimir / salvar em PDF</button><button id="closeReportBtn">Fechar relatório</button></div>
   </div>
 </div>
 
@@ -206,10 +208,12 @@
     queijo:{label:"Queijo",price:10,cost:4.00,stockKey:"queijo",fry:16}
   };
   const DRINK = {label:"Suco/Refrigerante",price:6,cost:3};
-  const COSTS = {massa:1.20,carne:2.30,frango:2.00,queijo:1.80,bebida:3.00,embalagem:.50,fryer:60,employeeCycle:12,deliveryAssistantCycle:12,training:80,layout:50,storage:120,fixedBase:18};
+  const COSTS = {massa:1.20,carne:2.30,frango:2.00,queijo:1.80,bebida:3.00,embalagem:.50,fryer:60,employeeHire:150,deliveryAssistantHire:150,employeeCycle:12,deliveryAssistantCycle:12,training:80,storage:120,fixedBase:18};
   const INITIAL_CAPACITY = {massa:45,carne:15,frango:15,queijo:15,bebida:30,embalagem:45};
   const STOCK_NAMES = {massa:"Massa",carne:"Carne",frango:"Frango",queijo:"Queijo",bebida:"Bebidas",embalagem:"Embalagens"};
   const PERISHABLE = ["massa","carne","frango","queijo"];
+  const PERFORMANCE_LABELS = {custo:"Custo",rapidez:"Rapidez",confiabilidade:"Confiabilidade",qualidade:"Qualidade",flexibilidade:"Flexibilidade"};
+  function zeroStock(){ const z={}; Object.keys(INITIAL_CAPACITY).forEach(k=>z[k]=0); return z }
   let state = {};
   let cycleTimer = null, renderTimer = null, selectedPastel = null, selectedDrink = false, selectedReadyId = null, currentReport = null;
   const $ = id => document.getElementById(id);
@@ -236,14 +240,15 @@
   }
   function setPastelPrice(v){ state.pastelPrice=normalizePrice(v); syncPastelPrices(); updatePriceTexts(); log(`Preço do pastel ajustado para ${fmtMoney(state.pastelPrice)}. ${priceProfile().message}`,"warn"); }
   function setShopName(v){ state.shopName=(String(v||"").trim()||"Pastelaria do Vale").slice(0,40); }
+  function setPerformanceFocus(v){ state.performanceFocus = PERFORMANCE_LABELS[v] ? v : "custo"; }
 
-  function freshStats(){return {arrived:0,registered:0,served:0,lost:0,errors:0,autoDelivered:0,manualDelivered:0,readyMade:0,revenue:0,variableCost:0,wasteCost:0,fixedCost:0,cycleInvestment:0,totalWait:0,readyWaitTotal:0,maxCustomerQueue:0,maxProductionQueue:0,maxReadyQueue:0,sold:{carne:0,frango:0,queijo:0,bebida:0},consumed:{massa:0,carne:0,frango:0,queijo:0,bebida:0,embalagem:0},spoilage:{},eventName:"Movimento normal",eventDescription:"Demanda dentro do esperado.",bottleneck:"Ainda não identificado",stockStart:{},capacityStart:{}}}
+  function freshStats(){return {arrived:0,registered:0,refused:0,stockouts:0,served:0,lost:0,errors:0,autoDelivered:0,manualDelivered:0,readyMade:0,revenue:0,variableCost:0,wasteCost:0,fixedCost:0,cycleInvestment:0,totalWait:0,readyWaitTotal:0,maxCustomerQueue:0,maxProductionQueue:0,maxReadyQueue:0,sold:{carne:0,frango:0,queijo:0,bebida:0},consumed:{massa:0,carne:0,frango:0,queijo:0,bebida:0,embalagem:0},spoilage:{},eventName:"Movimento normal",eventDescription:"Demanda dentro do esperado.",bottleneck:"Ainda não identificado",stockStart:{},capacityStart:{},performanceFocus:"custo"}}
 
   function resetGame(){
     clearInterval(cycleTimer); clearInterval(renderTimer);
     const existingName = $("shopNameInput") ? $("shopNameInput").value : "Pastelaria do Vale";
     const existingPrice = $("pastelPriceInput") ? $("pastelPriceInput").value : 10;
-    state = {running:false,cycle:1,remaining:CYCLE_SECONDS,cash:500,satisfaction:100,employees:2,fryers:1,fryerCapacity:4,deliveryAssistant:false,trained:false,layoutImproved:false,pendingInvestment:0,shopName:(String(existingName||"").trim()||"Pastelaria do Vale").slice(0,40),pastelPrice:normalizePrice(existingPrice),stock:copy(INITIAL_CAPACITY),capacity:copy(INITIAL_CAPACITY),activeCustomer:null,customerQueue:[],deliveryCustomers:[],ticketQueue:[],fryerSlots:[],readyOrders:[],history:[],logs:[],stats:freshStats(),nextCustomerId:1,nextOrderNo:1,nextTicketId:1,nextSpawnIn:0,assistantCounter:0,demand:{min:9,max:16,patience:1}};
+    state = {running:false,cycle:1,remaining:CYCLE_SECONDS,cash:500,satisfaction:100,employees:2,fryers:1,fryerCapacity:4,deliveryAssistants:0,trained:false,pendingInvestment:0,shopName:(String(existingName||"").trim()||"Pastelaria do Vale").slice(0,40),pastelPrice:normalizePrice(existingPrice),performanceFocus:($("performanceFocusInput")?$("performanceFocusInput").value:"custo"),stock:copy(INITIAL_CAPACITY),reserved:zeroStock(),capacity:copy(INITIAL_CAPACITY),activeCustomer:null,customerQueue:[],deliveryCustomers:[],ticketQueue:[],fryerSlots:[],readyOrders:[],history:[],logs:[],stats:freshStats(),nextCustomerId:1,nextOrderNo:1,nextTicketId:1,nextSpawnIn:0,assistantCounter:0,demand:{min:9,max:16,patience:1}};
     syncPastelPrices(); updatePriceTexts(); selectedPastel=null; selectedDrink=false; selectedReadyId=null; setupFryers(); log("Jogo reiniciado. Clique em iniciar ciclo.","warn"); closeModals(); render();
   }
   function setupFryers(){state.fryerSlots=[]; for(let i=0;i<state.fryerCapacity;i++) state.fryerSlots.push(null)}
@@ -263,8 +268,9 @@
     if(state.running) return; closeModals(); clearMachine();
     if($("shopNameInput")) setShopName($("shopNameInput").value);
     if($("pastelPriceInput")) setPastelPrice($("pastelPriceInput").value);
+    if($("performanceFocusInput")) setPerformanceFocus($("performanceFocusInput").value);
     state.running=true; state.remaining=CYCLE_SECONDS; state.activeCustomer=null; state.customerQueue=[]; state.deliveryCustomers=[]; state.ticketQueue=[]; state.readyOrders=[]; selectedReadyId=null; setupFryers();
-    state.stats=freshStats(); state.stats.stockStart=copy(state.stock); state.stats.capacityStart=copy(state.capacity); state.stats.cycleInvestment=state.pendingInvestment; state.pendingInvestment=0; state.assistantCounter=0;
+    state.stats=freshStats(); state.stats.stockStart=copy(state.stock); state.stats.capacityStart=copy(state.capacity); state.stats.performanceFocus=state.performanceFocus; state.stats.cycleInvestment=state.pendingInvestment; state.pendingInvestment=0; state.assistantCounter=0;
     chooseCycleEvent(); state.nextSpawnIn=0;
     const profile=priceProfile();
     if(profile.cycleSatisfaction) state.satisfaction=clamp(state.satisfaction+profile.cycleSatisfaction,0,100);
@@ -319,21 +325,37 @@
     if(!c){log("Nenhum cliente no balcão.","warn"); return}
     if(!selectedPastel){log("Selecione o sabor do pastel.","warn"); return}
     const typed={pastel:selectedPastel,drink:selectedDrink};
+    const missing=stockProblem(typed);
+    if(missing){ state.stats.stockouts++; log(`Não há ${STOCK_NAMES[missing].toLowerCase()} disponível para aceitar a comanda #${pad(c.orderNo)}. Recuse o pedido ou ajuste a seleção.`,"bad"); return }
     const correct = sameOrder(typed,c.order);
     if(!correct){state.stats.errors++; state.satisfaction=clamp(state.satisfaction-5,0,100); log(`Comanda #${pad(c.orderNo)} registrada diferente do pedido do cliente.`,"bad")}
+    reserveOrder(typed);
     const ticket={id:state.nextTicketId++,orderNo:c.orderNo,customerId:c.id,customerColor:c.color,order:typed,expected:c.order,correctlyRegistered:correct,createdAt:Date.now(),status:"fila"};
     state.ticketQueue.push(ticket); state.deliveryCustomers.push(c); state.stats.registered++; state.stats.maxProductionQueue=Math.max(state.stats.maxProductionQueue,state.ticketQueue.length);
-    log(`Comanda #${pad(c.orderNo)} enviada para produção: ${orderText(typed)}.`, correct?"good":"warn");
+    log(`Comanda #${pad(c.orderNo)} enviada para produção: ${orderText(typed)}. Insumos reservados.`, correct?"good":"warn");
+    state.activeCustomer=state.customerQueue.shift()||null; clearMachine(); render();
+  }
+  function rejectOrder(){
+    if(!state.running){log("Inicie o ciclo antes de recusar pedidos.","warn"); return}
+    const c=state.activeCustomer; if(!c){log("Nenhum cliente no balcão para recusar.","warn"); return}
+    const missing=stockProblem(c.order); state.stats.refused++;
+    if(missing){ state.stats.stockouts++; state.satisfaction=clamp(state.satisfaction-1,0,100); log(`Pedido #${pad(c.orderNo)} recusado por falta de ${STOCK_NAMES[missing].toLowerCase()}. Melhor recusar do que prometer e falhar.`,"warn") }
+    else { state.satisfaction=clamp(state.satisfaction-5,0,100); log(`Pedido #${pad(c.orderNo)} recusado mesmo havendo insumos disponíveis.`,"bad") }
     state.activeCustomer=state.customerQueue.shift()||null; clearMachine(); render();
   }
   function sameOrder(a,b){return a.pastel===b.pastel && !!a.drink===!!b.drink}
-  function stockProblem(order){ if(state.stock.massa<=0) return "massa"; if(state.stock[order.pastel]<=0) return order.pastel; if(state.stock.embalagem<=0) return "embalagem"; if(order.drink && state.stock.bebida<=0) return "bebida"; return null }
+  function orderRequirements(order){ const req={massa:1,embalagem:1}; req[order.pastel]=(req[order.pastel]||0)+1; if(order.drink) req.bebida=1; return req }
+  function availableStock(key){ return Math.max(0,(state.stock[key]||0)-(state.reserved[key]||0)) }
+  function stockProblem(order){ const req=orderRequirements(order); for(const k of Object.keys(req)){ if(availableStock(k)<req[k]) return k } return null }
+  function reservationProblem(order){ const req=orderRequirements(order); for(const k of Object.keys(req)){ if((state.reserved[k]||0)<req[k]) return k } return null }
+  function reserveOrder(order){ const req=orderRequirements(order); Object.keys(req).forEach(k=>state.reserved[k]=(state.reserved[k]||0)+req[k]) }
+  function releaseOrder(order){ const req=orderRequirements(order); Object.keys(req).forEach(k=>state.reserved[k]=Math.max(0,(state.reserved[k]||0)-req[k])) }
   function startFrying(ticketId){
     if(!state.running) return;
     const free=state.fryerSlots.findIndex(s=>s===null); if(free<0){log("Fritadeira cheia. A comanda ficará aguardando.","warn"); return}
     const idx=state.ticketQueue.findIndex(t=>t.id===ticketId); if(idx<0) return;
-    const ticket=state.ticketQueue[idx]; const missing=stockProblem(ticket.order);
-    if(missing){state.satisfaction=clamp(state.satisfaction-3,0,100); log(`Não foi possível iniciar a comanda #${pad(ticket.orderNo)}: falta ${STOCK_NAMES[missing].toLowerCase()}.`,"bad"); return}
+    const ticket=state.ticketQueue[idx]; const missing=reservationProblem(ticket.order);
+    if(missing){state.satisfaction=clamp(state.satisfaction-3,0,100); log(`Não foi possível iniciar a comanda #${pad(ticket.orderNo)}: reserva insuficiente de ${STOCK_NAMES[missing].toLowerCase()}.`,"bad"); return}
     state.ticketQueue.splice(idx,1);
     consumeStock(ticket.order);
     const speedFactor=(state.employees>2 ? .90 : 1) * (state.trained ? .90 : 1);
@@ -341,8 +363,8 @@
     state.fryerSlots[free]=ticket; log(`Fritura iniciada: #${pad(ticket.orderNo)} ${orderText(ticket.order)} (${ticket.duration}s).`,"good"); render();
   }
   function consumeStock(order){
-    state.stock.massa--; state.stock[order.pastel]--; state.stock.embalagem--; state.stats.consumed.massa++; state.stats.consumed[order.pastel]++; state.stats.consumed.embalagem++; state.stats.variableCost += COSTS.massa + COSTS[order.pastel] + COSTS.embalagem;
-    if(order.drink){state.stock.bebida--; state.stats.consumed.bebida++; state.stats.variableCost += COSTS.bebida}
+    state.reserved.massa=Math.max(0,state.reserved.massa-1); state.reserved[order.pastel]=Math.max(0,state.reserved[order.pastel]-1); state.reserved.embalagem=Math.max(0,state.reserved.embalagem-1); state.stock.massa--; state.stock[order.pastel]--; state.stock.embalagem--; state.stats.consumed.massa++; state.stats.consumed[order.pastel]++; state.stats.consumed.embalagem++; state.stats.variableCost += COSTS.massa + COSTS[order.pastel] + COSTS.embalagem;
+    if(order.drink){state.reserved.bebida=Math.max(0,state.reserved.bebida-1); state.stock.bebida--; state.stats.consumed.bebida++; state.stats.variableCost += COSTS.bebida}
   }
   function updateFryers(){
     const now=Date.now();
@@ -352,9 +374,10 @@
     }
   }
   function maybeAssistantDeliver(ticket){
-    if(!state.deliveryAssistant) return;
+    if((state.deliveryAssistants||0)<=0) return;
     state.assistantCounter++;
-    if(state.assistantCounter % 2 === 0){
+    const shouldDeliver = state.deliveryAssistants>=2 ? (state.assistantCounter % 3 !== 1) : (state.assistantCounter % 2 === 0);
+    if(shouldDeliver){
       ticket.assistantPlanned=true;
       log(`Auxiliar assumiu a entrega automática da comanda #${pad(ticket.orderNo)}.`,"good");
       setTimeout(()=>autoDeliver(ticket.id),1300);
@@ -388,7 +411,7 @@
     state.customerQueue=state.customerQueue.filter(x=>x.id!==c.id); state.deliveryCustomers=state.deliveryCustomers.filter(x=>x.id!==c.id); removeCustomerOrders(c.id,true);
   }
   function removeCustomerOrders(customerId,countWaste){
-    state.ticketQueue=state.ticketQueue.filter(t=>t.customerId!==customerId);
+    state.ticketQueue=state.ticketQueue.filter(t=>{ if(t.customerId===customerId){ releaseOrder(t.order); return false } return true });
     state.readyOrders=state.readyOrders.filter(t=>{ if(t.customerId===customerId && countWaste) state.stats.wasteCost+=variableCostFor(t.order); return t.customerId!==customerId });
     state.fryerSlots=state.fryerSlots.map(t=>{ if(t && t.customerId===customerId){ if(countWaste) state.stats.wasteCost+=variableCostFor(t.order); return null } return t });
   }
@@ -398,10 +421,11 @@
     state.running=false; clearInterval(cycleTimer); clearInterval(renderTimer); $("startBtn").disabled=false; $("endBtn").disabled=true;
     const uniquePending=new Set(); if(state.activeCustomer) uniquePending.add(state.activeCustomer.id); state.customerQueue.forEach(c=>uniquePending.add(c.id)); state.deliveryCustomers.forEach(c=>uniquePending.add(c.id));
     state.stats.lost += uniquePending.size; if(uniquePending.size) state.satisfaction=clamp(state.satisfaction-uniquePending.size*6,0,100);
-    state.readyOrders.forEach(t=>state.stats.wasteCost+=variableCostFor(t.order)); state.fryerSlots.forEach(t=>{if(t) state.stats.wasteCost+=variableCostFor(t.order)});
-    state.ticketQueue=[]; state.readyOrders=[]; state.fryerSlots=state.fryerSlots.map(()=>null); state.activeCustomer=null; state.customerQueue=[]; state.deliveryCustomers=[];
+    state.deliveryCustomers.slice().forEach(c=>removeCustomerOrders(c.id,true));
+    state.ticketQueue.forEach(t=>releaseOrder(t.order));
+    state.ticketQueue=[]; state.readyOrders=[]; state.fryerSlots=state.fryerSlots.map(()=>null); state.activeCustomer=null; state.customerQueue=[]; state.deliveryCustomers=[]; state.reserved=zeroStock();
     applySpoilage();
-    const fixed = COSTS.fixedBase + state.employees*COSTS.employeeCycle + (state.deliveryAssistant?COSTS.deliveryAssistantCycle:0) + Math.max(0,state.fryerCapacity-4)*2;
+    const fixed = COSTS.fixedBase + state.employees*COSTS.employeeCycle + (state.deliveryAssistants||0)*COSTS.deliveryAssistantCycle + Math.max(0,state.fryerCapacity-4)*2;
     state.stats.fixedCost=fixed; state.cash -= fixed;
     const report=buildReport(); state.history.push(report); state.cycle++; showReport(report); render(); log(`Ciclo encerrado. Custos fixos debitados: ${fmtMoney(fixed)}.`,"warn");
   }
@@ -423,97 +447,115 @@
   function hasCriticalStock(){ return Object.keys(state.stock).some(k=>state.stock[k]<=Math.max(2,Math.floor(state.capacity[k]*.15))) }
   function buildReport(){
     const avgWait=state.stats.served?state.stats.totalWait/state.stats.served:0, avgReady=state.stats.readyMade?state.stats.readyWaitTotal/Math.max(1,state.stats.served):0;
-    const operationalProfit=state.stats.revenue-state.stats.variableCost-state.stats.fixedCost-state.stats.wasteCost;
-    const score=clamp(Math.round(operationalProfit/8 + state.satisfaction*.45 + state.stats.served*2 - state.stats.lost*4 - state.stats.errors*3),0,100);
-    return {cycle:state.cycle,shopName:state.shopName||"Pastelaria do Vale",pastelPrice:state.pastelPrice||10,priceTier:priceProfile().label,event:state.stats.eventName,eventDesc:state.stats.eventDescription,arrived:state.stats.arrived,registered:state.stats.registered,served:state.stats.served,lost:state.stats.lost,errors:state.stats.errors,manualDelivered:state.stats.manualDelivered,autoDelivered:state.stats.autoDelivered,revenue:state.stats.revenue,variableCost:state.stats.variableCost,fixedCost:state.stats.fixedCost,wasteCost:state.stats.wasteCost,cycleInvestment:state.stats.cycleInvestment,operationalProfit,cash:state.cash,satisfaction:state.satisfaction,avgWait,avgReady,maxCustomerQueue:state.stats.maxCustomerQueue,maxProductionQueue:state.stats.maxProductionQueue,maxReadyQueue:state.stats.maxReadyQueue,bottleneck:state.stats.bottleneck,sold:copy(state.stats.sold),consumed:copy(state.stats.consumed),stock:copy(state.stock),capacity:copy(state.capacity),spoilage:copy(state.stats.spoilage),score};
+    const totalCosts=state.stats.variableCost+state.stats.fixedCost+state.stats.wasteCost;
+    const preTaxResult=state.stats.revenue-totalCosts-state.stats.cycleInvestment;
+    const projectedTax=preTaxResult>0?preTaxResult*.20:0;
+    const netProjected=preTaxResult-projectedTax;
+    const operationalProfit=preTaxResult;
+    const diversity=["carne","frango","queijo"].filter(k=>state.stats.sold[k]>0).length;
+    const performance={
+      custo:clamp(Math.round(70 + preTaxResult/6 - state.stats.wasteCost*.55),0,100),
+      rapidez:clamp(Math.round(100 - avgWait*.55 - state.stats.maxReadyQueue*5 - state.stats.lost*4),0,100),
+      confiabilidade:clamp(Math.round(100 - state.stats.errors*12 - state.stats.refused*4 - state.stats.lost*3),0,100),
+      qualidade:clamp(Math.round(state.satisfaction),0,100),
+      flexibilidade:clamp(Math.round(55 + diversity*10 + state.stats.served*1.4 - state.stats.stockouts*8 - state.stats.refused*3),0,100)
+    };
+    const score=clamp(Math.round(preTaxResult/8 + state.satisfaction*.45 + state.stats.served*2 - state.stats.lost*4 - state.stats.errors*3),0,100);
+    return {cycle:state.cycle,shopName:state.shopName||"Pastelaria do Vale",pastelPrice:state.pastelPrice||10,priceTier:priceProfile().label,performanceFocus:state.performanceFocus||"custo",performance,event:state.stats.eventName,eventDesc:state.stats.eventDescription,arrived:state.stats.arrived,registered:state.stats.registered,refused:state.stats.refused,stockouts:state.stats.stockouts,served:state.stats.served,lost:state.stats.lost,errors:state.stats.errors,manualDelivered:state.stats.manualDelivered,autoDelivered:state.stats.autoDelivered,revenue:state.stats.revenue,variableCost:state.stats.variableCost,fixedCost:state.stats.fixedCost,wasteCost:state.stats.wasteCost,totalCosts,cycleInvestment:state.stats.cycleInvestment,preTaxResult,projectedTax,netProjected,operationalProfit,cash:state.cash,satisfaction:state.satisfaction,avgWait,avgReady,maxCustomerQueue:state.stats.maxCustomerQueue,maxProductionQueue:state.stats.maxProductionQueue,maxReadyQueue:state.stats.maxReadyQueue,bottleneck:state.stats.bottleneck,sold:copy(state.stats.sold),consumed:copy(state.stats.consumed),stock:copy(state.stock),reserved:copy(state.reserved),capacity:copy(state.capacity),spoilage:copy(state.stats.spoilage),score};
   }
   function showReport(r){
     $("reportTitle").textContent=`Relatório do ciclo ${r.cycle} — ${r.shopName}`; $("eventText").textContent=`Evento do ciclo: ${r.event} — ${r.eventDesc}`;
-    const items=[["Clientes que chegaram",r.arrived],["Pedidos registrados",r.registered],["Preço do pastel",fmtMoney(r.pastelPrice)],["Estratégia de preço",r.priceTier],["Clientes atendidos",r.served],["Clientes perdidos",r.lost],["Entregas manuais",r.manualDelivered],["Entregas do auxiliar",r.autoDelivered],["Erros",r.errors],["Receita",fmtMoney(r.revenue)],["Custo variável usado",fmtMoney(r.variableCost)],["Custo fixo",fmtMoney(r.fixedCost)],["Desperdício",fmtMoney(r.wasteCost)],["Investimentos pré-ciclo",fmtMoney(r.cycleInvestment)],["Resultado operacional",fmtMoney(r.operationalProfit)],["Caixa final",fmtMoney(r.cash)],["Espera média",`${Math.round(r.avgWait)}s`],["Satisfação",`${Math.round(r.satisfaction)}/100`],["Pontuação",`${r.score}/100`]];
+    const items=[["Clientes que chegaram",r.arrived],["Pedidos registrados",r.registered],["Pedidos recusados",r.refused],["Preço do pastel",fmtMoney(r.pastelPrice)],["Estratégia de preço",r.priceTier],["Prioridade operacional",PERFORMANCE_LABELS[r.performanceFocus]||"Custo"],["Clientes atendidos",r.served],["Clientes perdidos",r.lost],["Entregas manuais",r.manualDelivered],["Entregas do auxiliar",r.autoDelivered],["Erros",r.errors],["Receita",fmtMoney(r.revenue)],["(-) Custos operacionais",fmtMoney(r.totalCosts)],["(-) Investimentos",fmtMoney(r.cycleInvestment)],["Resultado antes dos impostos",fmtMoney(r.preTaxResult)],["(-) Impostos projetados 20%",fmtMoney(r.projectedTax)],["Lucro líquido projetado",fmtMoney(r.netProjected)],["Caixa final do jogo",fmtMoney(r.cash)],["Espera média",`${Math.round(r.avgWait)}s`],["Satisfação",`${Math.round(r.satisfaction)}/100`],["Pontuação",`${r.score}/100`]];
     $("reportGrid").innerHTML=items.map(([l,v])=>`<div class="report-item"><div class="label">${l}</div><div class="value">${v}</div></div>`).join("");
     $("diagnosticText").innerHTML=diagnosticHTML(r); currentReport=r; $("printArea").innerHTML=printReportHTML(r); $("reportModal").classList.add("show"); buildPricing(); buildPurchases(); buildUpgrades();
   }
+  function performanceHTML(r){
+    const entries=Object.entries(r.performance||{}); if(!entries.length) return "";
+    const sorted=[...entries].sort((a,b)=>b[1]-a[1]); const best=sorted[0], worst=sorted[sorted.length-1];
+    const list=entries.map(([k,v])=>`<li><b>${PERFORMANCE_LABELS[k]}:</b> ${v}/100</li>`).join("");
+    return `<p><b>Leitura pelos objetivos de desempenho:</b> prioridade escolhida: <b>${PERFORMANCE_LABELS[r.performanceFocus]||"Custo"}</b>. Melhor desempenho: <b>${PERFORMANCE_LABELS[best[0]]}</b> (${best[1]}/100). Ponto crítico: <b>${PERFORMANCE_LABELS[worst[0]]}</b> (${worst[1]}/100).</p><ul>${list}</ul>`;
+  }
   function diagnosticHTML(r){
-    const most = mostSoldPastel(r.sold); const stockMsgs = stockRecommendations(r).slice(0,6).map(x=>`<li><b>${STOCK_NAMES[x.key]}:</b> ${x.message}</li>`).join(""); const priceMsg = priceProfile(r.pastelPrice).message;
+    const most = mostSoldPastel(r.sold); const stockMsgs = stockRecommendations(r,false).slice(0,6).map(x=>`<li><b>${STOCK_NAMES[x.key]}:</b> ${x.message}</li>`).join(""); const priceMsg = priceProfile(r.pastelPrice).message;
     const spoilMsgs = Object.keys(r.spoilage).length ? `<p><b>Desperdício:</b> ${Object.entries(r.spoilage).map(([k,q])=>`${q} de ${STOCK_NAMES[k]}`).join(", ")}. Comprar demais gerou perda de 20% do estoque excedente/alto.</p>` : `<p><b>Desperdício:</b> não houve perda por excesso de estoque neste ciclo.</p>`;
-    return `<p><b>Gargalo identificado:</b> ${r.bottleneck}.</p><p><b>Preço:</b> ${fmtMoney(r.pastelPrice)} — ${priceMsg}</p><p><b>Sabor mais vendido:</b> ${most ? PASTELS[most].label : "sem vendas"}. Se o caixa estiver limitado, priorize massa, embalagem e o recheio com maior saída.</p>${spoilMsgs}<p><b>Recomendações de reposição:</b></p><ul>${stockMsgs}</ul>`;
+    const taxMsg = `<p><b>Ordem contábil-gerencial:</b> Receita ${fmtMoney(r.revenue)} − custos ${fmtMoney(r.totalCosts)} − investimentos ${fmtMoney(r.cycleInvestment)} = resultado antes dos impostos ${fmtMoney(r.preTaxResult)}. O imposto de 20% é apenas projeção relatorial e não reduz o caixa do jogo.</p>`;
+    return `${taxMsg}${performanceHTML(r)}<p><b>Gargalo identificado:</b> ${r.bottleneck}.</p><p><b>Preço:</b> ${fmtMoney(r.pastelPrice)} — ${priceMsg}</p><p><b>Sabor mais vendido:</b> ${most ? PASTELS[most].label : "sem vendas"}. Se o caixa estiver limitado, priorize massa, embalagem e o recheio com maior saída.</p>${spoilMsgs}<p><b>Recomendações de reposição:</b></p><ul>${stockMsgs}</ul>`;
   }
   function printReportHTML(r){
     const rows=[
-      ["Evento",`${r.event} — ${r.eventDesc}`],["Clientes que chegaram",r.arrived],["Pedidos registrados",r.registered],["Preço do pastel",fmtMoney(r.pastelPrice)],["Estratégia de preço",r.priceTier],["Clientes atendidos",r.served],["Clientes perdidos",r.lost],["Entregas manuais",r.manualDelivered],["Entregas do auxiliar",r.autoDelivered],["Erros",r.errors],["Receita",fmtMoney(r.revenue)],["Custo variável usado",fmtMoney(r.variableCost)],["Custo fixo",fmtMoney(r.fixedCost)],["Desperdício",fmtMoney(r.wasteCost)],["Investimentos pré-ciclo",fmtMoney(r.cycleInvestment)],["Resultado operacional",fmtMoney(r.operationalProfit)],["Caixa final",fmtMoney(r.cash)],["Espera média",`${Math.round(r.avgWait)}s`],["Satisfação",`${Math.round(r.satisfaction)}/100`],["Gargalo",r.bottleneck],["Pontuação",`${r.score}/100`]
+      ["Evento",`${r.event} — ${r.eventDesc}`],["Clientes que chegaram",r.arrived],["Pedidos registrados",r.registered],["Pedidos recusados",r.refused],["Preço do pastel",fmtMoney(r.pastelPrice)],["Estratégia de preço",r.priceTier],["Prioridade operacional",PERFORMANCE_LABELS[r.performanceFocus]||"Custo"],["Clientes atendidos",r.served],["Clientes perdidos",r.lost],["Entregas manuais",r.manualDelivered],["Entregas do auxiliar",r.autoDelivered],["Erros",r.errors],["Receita",fmtMoney(r.revenue)],["(-) Custos operacionais",fmtMoney(r.totalCosts)],["(-) Investimentos",fmtMoney(r.cycleInvestment)],["Resultado antes dos impostos",fmtMoney(r.preTaxResult)],["(-) Impostos projetados — 20%",fmtMoney(r.projectedTax)],["Lucro líquido projetado",fmtMoney(r.netProjected)],["Caixa final do jogo",fmtMoney(r.cash)],["Espera média",`${Math.round(r.avgWait)}s`],["Satisfação",`${Math.round(r.satisfaction)}/100`],["Gargalo",r.bottleneck],["Pontuação",`${r.score}/100`]
     ];
-    const stockRows=Object.keys(r.stock).map(k=>`<tr><td>${STOCK_NAMES[k]}</td><td>${r.consumed[k]||0}</td><td>${r.stock[k]}/${r.capacity[k]}</td><td>${r.spoilage[k]||0}</td></tr>`).join("");
-    return `<h1>${r.shopName} — Relatório do ciclo ${r.cycle}</h1><div class="small">Pastelaria em Operação — Sistema desenvolvido para a disciplina Gestão de Operações e Serviços, Professor Me. Luan Sodré da UNIVALE.</div><h2>Resumo operacional e financeiro</h2><table><tbody>${rows.map(([a,b])=>`<tr><th>${a}</th><td>${b}</td></tr>`).join("")}</tbody></table><h2>Estoque, consumo e desperdício</h2><table><thead><tr><th>Item</th><th>Consumido</th><th>Estoque final / capacidade</th><th>Desperdício</th></tr></thead><tbody>${stockRows}</tbody></table><h2>Diagnóstico gerencial</h2>${diagnosticHTML(r)}<div class="small">Sugestão de uso: peça que os alunos justifiquem quais compras e melhorias fariam antes do próximo ciclo.</div>`;
+    const stockRows=Object.keys(r.stock).map(k=>`<tr><td>${STOCK_NAMES[k]}</td><td>${r.consumed[k]||0}</td><td>${r.stock[k]}/${r.capacity[k]}</td><td>${r.reserved && r.reserved[k] ? r.reserved[k] : 0}</td><td>${r.spoilage[k]||0}</td></tr>`).join("");
+    return `<h1>${r.shopName} — Relatório do ciclo ${r.cycle}</h1><div class="small">Pastelaria em Operação — Sistema desenvolvido para a disciplina Gestão de Operações e Serviços, Professor Me. Luan Sodré da UNIVALE.</div><h2>Demonstração gerencial do ciclo</h2><table><tbody>${rows.map(([a,b])=>`<tr><th>${a}</th><td>${b}</td></tr>`).join("")}</tbody></table><h2>Estoque, consumo e desperdício</h2><table><thead><tr><th>Item</th><th>Consumido</th><th>Estoque final / capacidade</th><th>Reservado</th><th>Desperdício</th></tr></thead><tbody>${stockRows}</tbody></table><h2>Diagnóstico gerencial</h2>${diagnosticHTML(r)}<div class="small">Sugestão de uso: peça que os alunos justifiquem quais compras e melhorias fariam antes do próximo ciclo.</div>`;
   }
   function printReport(){ if(!currentReport) return; $("printArea").innerHTML=printReportHTML(currentReport); window.print(); }
   function mostSoldPastel(sold){ let best=null, val=0; ["carne","frango","queijo"].forEach(k=>{if(sold[k]>val){best=k;val=sold[k]}}); return best }
-  function stockRecommendations(r){
-    const most=mostSoldPastel(r.sold); return Object.keys(state.stock).map(k=>{
-      const current=state.stock[k], cap=state.capacity[k], used=r.consumed[k]||0; let priority="low", suggested=0, message="estoque confortável.";
-      if(current===0){priority="high"; suggested=Math.min(cap-current,15); message=`ruptura. Repor com urgência até o limite de capacidade.`}
-      else if(current<=cap*.25){priority="high"; suggested=Math.min(cap-current,Math.max(8,used)); message=`nível crítico (${current}/${cap}). Comprar pelo menos ${suggested}.`}
-      else if(current<=cap*.45){priority="medium"; suggested=Math.min(cap-current,Math.max(5,Math.ceil(used*.6))); message=`atenção (${current}/${cap}). Considere comprar ${suggested}.`}
+  function stockRecommendations(r, live=true){
+    const stockSource = live ? state.stock : (r.stock||state.stock);
+    const capSource = live ? state.capacity : (r.capacity||state.capacity);
+    const reservedSource = live ? (state.reserved||{}) : (r.reserved||{});
+    const most=mostSoldPastel(r.sold); return Object.keys(stockSource).map(k=>{
+      const current=stockSource[k], cap=capSource[k], used=r.consumed[k]||0, reserved=reservedSource[k]||0, available=Math.max(0,current-reserved); let priority="low", suggested=0, message="estoque confortável.";
+      if(available===0){priority="high"; suggested=Math.min(cap-current,15); message=`ruptura ou itens totalmente reservados. Repor com urgência até o limite de capacidade.`}
+      else if(available<=cap*.25){priority="high"; suggested=Math.min(cap-current,Math.max(8,used)); message=`nível crítico: ${available} disponível(is), ${reserved} reservado(s). Comprar pelo menos ${suggested}.`}
+      else if(available<=cap*.45){priority="medium"; suggested=Math.min(cap-current,Math.max(5,Math.ceil(used*.6))); message=`atenção: ${available} disponível(is), ${reserved} reservado(s). Considere comprar ${suggested}.`}
       if(k===most || (k==="massa"&&used>0) || (k==="embalagem"&&used>0)) priority = priority==="low" ? "medium" : priority;
       if(k===most && suggested===0 && current<cap) {suggested=Math.min(cap-current,5); message=`foi o item de maior saída. Se houver caixa, reforçar ${suggested}.`}
-      return {key:k,current,cap,used,priority,suggested,message};
+      return {key:k,current,cap,used,reserved,available,priority,suggested,message};
     }).sort((a,b)=>({high:3,medium:2,low:1}[b.priority]-({high:3,medium:2,low:1}[a.priority])));
   }
 
   function buildPricing(){
     updatePriceTexts();
-    if($("modalPastelPriceInput")) $("modalPastelPriceInput").oninput = e => setPastelPrice(e.target.value);
   }
   function buildPurchases(){
     $("cashBanner").textContent=`CAIXA DISPONÍVEL: ${fmtMoney(state.cash)}`;
-    const recs=stockRecommendations(state.history[state.history.length-1] || buildReport());
+    const recs=stockRecommendations(state.history[state.history.length-1] || buildReport(), true);
     $("stockBuyGrid").innerHTML=recs.map(r=>{
       const max=Math.max(0,r.cap-r.current); const totalSug=Math.min(max,r.suggested||0); const cls=r.priority==="high"?"priority-high":r.priority==="medium"?"priority-medium":"priority-low";
-      return `<div class="buy-card ${cls}"><h3>${STOCK_NAMES[r.key]}</h3><p>Estoque: <b>${r.current}/${r.cap}</b><br>Consumido no ciclo: <b>${r.used}</b><br>Custo unitário: <b>${fmtMoney(COSTS[r.key])}</b><br>Prioridade: <b>${r.priority.toUpperCase()}</b><br>${r.message}</p><div class="buy-controls"><input id="qty-${r.key}" type="number" min="0" max="${max}" value="${totalSug}" oninput="window.__pastelaria.updateBuyPreview('${r.key}')"><button onclick="window.__pastelaria.buyStock('${r.key}')">Comprar</button></div><div class="cost-preview" id="preview-${r.key}"></div><div class="tiny">Máximo possível agora: ${max}. ${r.current>r.cap*.70?"Cuidado com desperdício se sobrar muito.":""}</div></div>`;
+      return `<div class="buy-card ${cls}"><h3>${STOCK_NAMES[r.key]}</h3><p>Estoque físico: <b>${r.current}/${r.cap}</b><br>Disponível: <b>${r.available}</b> | Reservado: <b>${r.reserved}</b><br>Consumido no ciclo: <b>${r.used}</b><br>Custo unitário: <b>${fmtMoney(COSTS[r.key])}</b><br>Prioridade: <b>${r.priority.toUpperCase()}</b><br>${r.message}</p><div class="buy-controls"><input id="qty-${r.key}" type="number" min="0" max="${max}" value="${totalSug}" oninput="window.__pastelaria.updateBuyPreview('${r.key}')"><button onclick="window.__pastelaria.buyStock('${r.key}')">Comprar</button></div><div class="cost-preview" id="preview-${r.key}"></div><div class="tiny">Máximo possível agora: ${max}. ${r.current>r.cap*.70?"Cuidado com desperdício se sobrar muito.":""}</div></div>`;
     }).join("");
     recs.forEach(r=>updateBuyPreview(r.key));
   }
   function buildUpgrades(){
     $("cashBanner").textContent=`CAIXA DISPONÍVEL: ${fmtMoney(state.cash)}`;
     const ups=[
+      {title:"Ampliar estoque",cost:COSTS.storage,desc:"Aumenta em 20% a capacidade máxima de armazenamento de todos os itens. Faça isso antes de comprar acima do limite atual.",fn:"expandStorage",disabled:false},
       {title:"+1 espaço na fritadeira",cost:COSTS.fryer,desc:"Libera apenas 1 espaço extra de fritura. Capacidade máxima: 8 pastéis simultâneos.",fn:"buyFryer",disabled:state.fryerCapacity>=8},
-      {title:"Contratar funcionário",cost:COSTS.employeeCycle,desc:"Aumenta custo fixo por ciclo e reduz o tempo de fritura em 10%. Limite: 4 funcionários.",fn:"hireEmployee",disabled:state.employees>=4,cycle:true},
-      {title:"Auxiliar de entrega",cost:COSTS.deliveryAssistantCycle,desc:"Entrega automaticamente metade dos pedidos prontos, sempre ao cliente correto.",fn:"hireDeliveryAssistant",disabled:state.deliveryAssistant,cycle:true},
+      {title:"Contratar funcionário",cost:COSTS.employeeHire,desc:`Custo de contratação. Reduz o tempo de fritura/preparo em 10%. Equipe: ${state.employees}/4.`,fn:"hireEmployee",disabled:state.employees>=4},
+      {title:"Contratar ajudante de entrega",cost:COSTS.deliveryAssistantHire,desc:`Entrega automaticamente parte dos pedidos prontos, sempre ao cliente correto. Ajudantes: ${state.deliveryAssistants||0}/2.`,fn:"hireDeliveryAssistant",disabled:(state.deliveryAssistants||0)>=2},
       {title:"Treinar equipe",cost:COSTS.training,desc:"Reduz erros e acelera a produção em 10%.",fn:"trainTeam",disabled:state.trained},
-      {title:"Melhorar layout",cost:COSTS.layout,desc:"Organiza o balcão e reduz o gargalo de entrega manual.",fn:"improveLayout",disabled:state.layoutImproved},
-      {title:"Ampliar estoque",cost:COSTS.storage,desc:"Aumenta em 20% a capacidade máxima de armazenamento de todos os itens.",fn:"expandStorage",disabled:false},
       {title:"Divulgação",cost:40,desc:"Aumenta a demanda no próximo ciclo. Use apenas se a capacidade conseguir acompanhar.",fn:"advertise",disabled:false},
       {title:"Comprar reposição sugerida",cost:0,desc:"Compra automaticamente os itens críticos, respeitando o caixa e a capacidade de estoque.",fn:"buySuggested",disabled:false}
     ];
-    $("upgradeGrid").innerHTML=ups.map(u=>`<div class="upgrade"><h3>${u.title}</h3><p>${u.desc}</p><div class="label">${u.cycle?"Custo por ciclo":"Custo"}</div><div class="value">${u.cost?fmtMoney(u.cost):"conforme estoque"}</div><button ${u.disabled?"disabled":""} onclick="window.__pastelaria.${u.fn}()">${u.disabled?"Já aplicado":"Selecionar"}</button></div>`).join("");
+    $("upgradeGrid").innerHTML=ups.map(u=>`<div class="upgrade"><h3>${u.title}</h3><p>${u.desc}</p><div class="label">Saldo</div><div class="value">${u.cost ? (state.cash>=u.cost ? "Disponível" : "Insuficiente") : "conforme estoque"}</div><div class="tiny">${u.cost?`Valor: ${fmtMoney(u.cost)}`:""}</div><button ${u.disabled|| (u.cost && state.cash<u.cost) ? "disabled":""} onclick="window.__pastelaria.${u.fn}()">${u.disabled?"Já aplicado":(u.cost && state.cash<u.cost?"Saldo insuficiente":"Selecionar")}</button></div>`).join("");
   }
   function spend(amount){ if(state.cash<amount){log(`Caixa insuficiente. Faltam ${fmtMoney(amount-state.cash)}.`,"bad"); return false} state.cash-=amount; state.pendingInvestment+=amount; return true }
   function updateBuyPreview(key){
     const input=$("qty-"+key), box=$("preview-"+key); if(!input||!box) return;
     const max=Math.max(0,state.capacity[key]-state.stock[key]);
     let qty=parseInt(input.value||"0",10); if(!Number.isFinite(qty)||qty<0) qty=0;
-    const maxAffordable=Math.floor(state.cash/COSTS[key]);
-    const qtyByCapacity=Math.min(qty,max); const payableQty=Math.min(qtyByCapacity,maxAffordable);
-    const total=payableQty*COSTS[key]; const after=state.cash-total;
+    const qtyByCapacity=Math.min(qty,max);
+    const total=qtyByCapacity*COSTS[key];
     let alert="";
     if(qty>max) alert+=`Capacidade limita a ${max}. `;
-    if(qtyByCapacity>maxAffordable) alert+=`Caixa permite ${Math.max(0,maxAffordable)}. `;
-    box.innerHTML=`Total da compra: <b>${fmtMoney(total)}</b><br>Caixa após compra: <b>${fmtMoney(after)}</b>${alert?`<br><span class="tag warn">${alert}</span>`:""}`;
+    if(total>state.cash) alert+=`Saldo insuficiente para a quantidade escolhida. `;
+    const saldo = total>0 && state.cash>=total ? "disponível" : (qty>0 ? "insuficiente" : "—");
+    box.innerHTML=`Total da compra: <b>${fmtMoney(total)}</b><br>Saldo: <b>${saldo}</b>${alert?`<br><span class="tag warn">${alert}</span>`:""}`;
   }
   function buyFryer(){ if(state.fryerCapacity>=8) return; if(!spend(COSTS.fryer)) return; state.fryerCapacity++; setupFryers(); log("Capacidade da fritadeira ampliada em +1 espaço.","good"); buildUpgrades(); render() }
-  function hireEmployee(){ if(state.employees>=4) return; state.employees++; log(`Funcionário contratado. Custo fixo aumenta em ${fmtMoney(COSTS.employeeCycle)} por ciclo.`,"good"); buildUpgrades(); render() }
-  function hireDeliveryAssistant(){ if(state.deliveryAssistant) return; state.deliveryAssistant=true; log(`Auxiliar de entrega contratado. Ele entregará metade dos pedidos prontos. Custo: ${fmtMoney(COSTS.deliveryAssistantCycle)} por ciclo.`,"good"); buildUpgrades(); render() }
+  function hireEmployee(){ if(state.employees>=4) return; if(!spend(COSTS.employeeHire)) return; state.employees++; log(`Funcionário contratado por ${fmtMoney(COSTS.employeeHire)}. Equipe atual: ${state.employees}/4.`,"good"); buildUpgrades(); render() }
+  function hireDeliveryAssistant(){ if((state.deliveryAssistants||0)>=2) return; if(!spend(COSTS.deliveryAssistantHire)) return; state.deliveryAssistants=(state.deliveryAssistants||0)+1; log(`Ajudante de entrega contratado por ${fmtMoney(COSTS.deliveryAssistantHire)}. Ajudantes: ${state.deliveryAssistants}/2.`,"good"); buildUpgrades(); render() }
   function trainTeam(){ if(state.trained) return; if(!spend(COSTS.training)) return; state.trained=true; log("Equipe treinada.","good"); buildUpgrades(); render() }
   function improveLayout(){ if(state.layoutImproved) return; if(!spend(COSTS.layout)) return; state.layoutImproved=true; log("Layout melhorado. Fluxo do balcão mais organizado.","good"); buildUpgrades(); render() }
   function expandStorage(){ if(!spend(COSTS.storage)) return; Object.keys(state.capacity).forEach(k=>{state.capacity[k]+=Math.max(1,Math.ceil(INITIAL_CAPACITY[k]*.20))}); log("Capacidade de estoque ampliada em 20%.","good"); buildPurchases(); buildUpgrades(); render() }
   function advertise(){ if(!spend(40)) return; state.pendingDemandBoost=true; log("Divulgação comprada. Próximo ciclo terá demanda maior.","warn"); buildUpgrades(); render() }
   function buyStock(key){
     const input=$("qty-"+key); let qty=clamp(parseInt(input.value||"0",10),0,state.capacity[key]-state.stock[key]); if(qty<=0){log("Informe uma quantidade válida dentro da capacidade do estoque.","warn"); return}
-    const maxAffordable=Math.floor(state.cash/COSTS[key]); if(maxAffordable<=0){log("Caixa insuficiente para esta compra.","bad"); return}
-    if(qty>maxAffordable){qty=maxAffordable; log(`Quantidade ajustada ao caixa disponível: ${qty}.`,"warn")}
-    const amount=qty*COSTS[key]; if(!spend(amount)) return; state.stock[key]+=qty; log(`Compra realizada: +${qty} ${STOCK_NAMES[key].toLowerCase()} por ${fmtMoney(amount)}.`,"good"); buildPurchases(); buildUpgrades(); render();
+    const amount=qty*COSTS[key]; if(amount>state.cash){log("Caixa insuficiente para a quantidade escolhida.","bad"); return} if(!spend(amount)) return; state.stock[key]+=qty; log(`Compra realizada: +${qty} ${STOCK_NAMES[key].toLowerCase()} por ${fmtMoney(amount)}.`,"good"); buildPurchases(); buildUpgrades(); render();
   }
   function buySuggested(){
-    const last=state.history[state.history.length-1]; if(!last) return; const recs=stockRecommendations(last).filter(r=>r.priority!=="low"); let bought=0;
+    const last=state.history[state.history.length-1]; if(!last) return; const recs=stockRecommendations(last, true).filter(r=>r.priority!=="low"); let bought=0;
     for(const r of recs){ const can=Math.min(r.suggested||0,state.capacity[r.key]-state.stock[r.key],Math.floor(state.cash/COSTS[r.key])); if(can>0){ state.cash-=can*COSTS[r.key]; state.pendingInvestment+=can*COSTS[r.key]; state.stock[r.key]+=can; bought+=can; log(`Reposição sugerida: +${can} ${STOCK_NAMES[r.key].toLowerCase()}.`,"good") } }
     if(!bought) log("Não havia caixa, capacidade ou itens críticos para reposição automática.","warn"); buildPurchases(); buildUpgrades(); render();
   }
@@ -524,7 +566,7 @@
   function closeModals(){ $("reportModal").classList.remove("show"); $("historyModal").classList.remove("show") }
   function log(msg,type=""){ const cls=type?`log-${type}`:""; state.logs.unshift({msg,cls,time:new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit",second:"2-digit"})}); state.logs=state.logs.slice(0,80) }
   function render(){ renderHud(); renderCustomers(); renderDeliveryCustomers(); renderMachineDisplay(); updateMachineButtons(); renderTickets(); renderFryers(); renderReadyOrders(); renderStock(); renderLog(); }
-  function renderHud(){ $("cycleValue").textContent=state.cycle; $("timerValue").textContent=`${String(Math.floor(state.remaining/60)).padStart(2,"0")}:${String(state.remaining%60).padStart(2,"0")}`; $("cashValue").textContent=fmtMoney(state.cash); $("satisfactionValue").textContent=`${Math.round(state.satisfaction)}/100`; $("employeesValue").textContent=`${state.employees}${state.trained?" ⭐":""}${state.layoutImproved?" 🧭":""}`; $("assistantValue").textContent=state.deliveryAssistant?"Sim":"Não"; $("fryersValue").textContent=`${state.fryerCapacity} espaços`; $("servedValue").textContent=state.stats.served; $("lostValue").textContent=state.stats.lost; }
+  function renderHud(){ $("cycleValue").textContent=state.cycle; $("timerValue").textContent=`${String(Math.floor(state.remaining/60)).padStart(2,"0")}:${String(state.remaining%60).padStart(2,"0")}`; $("cashValue").textContent=fmtMoney(state.cash); $("satisfactionValue").textContent=`${Math.round(state.satisfaction)}/100`; $("employeesValue").textContent=`${state.employees}/4${state.trained?" ⭐":""}`; $("assistantValue").textContent=(state.deliveryAssistants||0)+"/2"; $("fryersValue").textContent=`${state.fryerCapacity} espaços`; $("servedValue").textContent=state.stats.served; $("lostValue").textContent=state.stats.lost; }
   function customerHTML(c,showOrder=true,drop=false){ if(!c) return `<div class="tiny">Aguardando cliente...</div>`; const pct=patiencePct(c); const mood=pct<25?"😡":pct<50?"😟":c.mood; const pCls=pct<25?"bad":pct<50?"warn":""; return `<div class="customer ${drop?"dropzone":""}" data-customer-id="${c.id}">${showOrder?`<div class="bubble">#${pad(c.orderNo)}<br>${orderText(c.order)}</div>`:`<div class="bubble">#${pad(c.orderNo)}<br>${c.color.toUpperCase()}</div>`}<div class="sprite"><div class="hair"></div><div class="head"></div><div class="body shirt-${c.color}"></div><div class="legs"></div></div><div class="mood">${mood}</div><div class="customer-name">${c.color}</div><div class="patience ${pCls}"><span style="width:${pct}%"></span></div></div>` }
   function patiencePct(c){ return clamp(100-((Date.now()-c.bornAt)/1000)/c.patience*100,0,100) }
   function renderCustomers(){ $("activeCustomer").innerHTML=customerHTML(state.activeCustomer,true,false); $("customerQueue").innerHTML=state.customerQueue.map(c=>customerHTML(c,true,false)).join("")||`<div class="tiny">Sem fila no momento.</div>` }
@@ -546,14 +588,22 @@
     $("readyOrders").innerHTML=state.readyOrders.map(t=>`<div class="ready-order ${selectedReadyId===t.id?"selected":""} ${t.assistantPlanned?"auto":""}" draggable="true" data-ticket-id="${t.id}"><span class="order-no">#${pad(t.orderNo)}</span><br><b>${orderText(t.order)}</b><br>Para: ${t.customerColor}<br>${t.assistantPlanned?`<span class="tag good">Auxiliar</span>`:`<span class="tag warn">Manual</span>`}</div>`).join("")||`<div class="tiny">Nenhuma bandeja pronta.</div>`;
     document.querySelectorAll(".ready-order").forEach(el=>{ el.addEventListener("dragstart",e=>e.dataTransfer.setData("text/plain",el.dataset.ticketId)); el.addEventListener("click",()=>{ const id=Number(el.dataset.ticketId); selectedReadyId=selectedReadyId===id?null:id; render() }) });
   }
-  function renderStock(){ const data=Object.keys(state.stock); $("stockGrid").innerHTML=data.map(k=>{ const pct=state.stock[k]/state.capacity[k]; const cls=pct<=.2?"low":pct<=.4?"warn":""; return `<div class="stock-item ${cls}"><b>${STOCK_NAMES[k]}</b><br><span class="value">${state.stock[k]}</span><div class="stock-cap">capacidade: ${state.capacity[k]}</div></div>` }).join("") }
+  function renderStock(){
+    const data=Object.keys(state.stock);
+    $("stockGrid").innerHTML=data.map(k=>{
+      const total=state.stock[k]||0, cap=state.capacity[k]||1, reserved=(state.reserved&&state.reserved[k])||0, available=Math.max(0,total-reserved), free=Math.max(0,cap-total);
+      const pct=available/cap, cls=pct<=.2?"low":pct<=.4?"warn":"";
+      const avW=Math.max(0,available/cap*100), resW=Math.max(0,reserved/cap*100), freeW=Math.max(0,free/cap*100);
+      return `<div class="stock-item ${cls}"><b>${STOCK_NAMES[k]}</b><div class="stock-numbers">Disponível: <b>${available}</b> | Reservado: <b>${reserved}</b><br>Total físico: <b>${total}/${cap}</b></div><div class="stockbar" title="verde: disponível; amarelo: reservado; cinza: espaço livre"><span class="bar-available" style="width:${avW}%"></span><span class="bar-reserved" style="width:${resW}%"></span><span class="bar-free" style="width:${freeW}%"></span></div><div class="stock-legend">🟩 disponível · 🟨 reservado · ⬛ espaço livre</div></div>`
+    }).join("")
+  }
   function renderLog(){ $("logBox").innerHTML=state.logs.map(l=>`<div class="log-line ${l.cls}">[${l.time}] ${l.msg}</div>`).join("") }
   function orderText(o){ return `${PASTELS[o.pastel].label}${o.drink?" + Refri":""}` }
   function pad(n){ return String(n).padStart(3,"0") }
 
-  $("startBtn").addEventListener("click",startCycle); $("endBtn").addEventListener("click",endCycle); $("resetBtn").addEventListener("click",()=>{if(confirm("Resetar todo o jogo e voltar ao caixa inicial?")) resetGame()}); $("historyBtn").addEventListener("click",showHistory); $("closeHistoryBtn").addEventListener("click",()=>$("historyModal").classList.remove("show")); $("closeReportBtn").addEventListener("click",()=>$("reportModal").classList.remove("show")); $("printReportBtn").addEventListener("click",printReport); $("nextCycleBtn").addEventListener("click",()=>{ $("reportModal").classList.remove("show"); startCycle() }); $("btnCarne").addEventListener("click",()=>selectPastel("carne")); $("btnFrango").addEventListener("click",()=>selectPastel("frango")); $("btnQueijo").addEventListener("click",()=>selectPastel("queijo")); $("btnDrink").addEventListener("click",toggleDrink); $("btnClear").addEventListener("click",clearMachine); $("btnFinalize").addEventListener("click",finalizeOrder);
-  $("shopNameInput").addEventListener("input",e=>setShopName(e.target.value)); $("pastelPriceInput").addEventListener("input",e=>setPastelPrice(e.target.value));
-  window.__pastelaria={startFrying,buyStock,updateBuyPreview,buyFryer,hireEmployee,hireDeliveryAssistant,trainTeam,improveLayout,expandStorage,advertise,buySuggested,setPastelPrice,setShopName};
+  $("startBtn").addEventListener("click",startCycle); $("endBtn").addEventListener("click",endCycle); $("resetBtn").addEventListener("click",()=>{if(confirm("Resetar todo o jogo e voltar ao caixa inicial?")) resetGame()}); $("historyBtn").addEventListener("click",showHistory); $("closeHistoryBtn").addEventListener("click",()=>$("historyModal").classList.remove("show")); $("closeReportBtn").addEventListener("click",()=>$("reportModal").classList.remove("show")); $("printReportBtn").addEventListener("click",printReport); $("nextCycleBtn").addEventListener("click",()=>{ $("reportModal").classList.remove("show"); }); $("btnCarne").addEventListener("click",()=>selectPastel("carne")); $("btnFrango").addEventListener("click",()=>selectPastel("frango")); $("btnQueijo").addEventListener("click",()=>selectPastel("queijo")); $("btnDrink").addEventListener("click",toggleDrink); $("btnClear").addEventListener("click",clearMachine); $("btnReject").addEventListener("click",rejectOrder); $("btnFinalize").addEventListener("click",finalizeOrder);
+  $("shopNameInput").addEventListener("input",e=>setShopName(e.target.value)); $("pastelPriceInput").addEventListener("input",e=>setPastelPrice(e.target.value)); $("performanceFocusInput").addEventListener("change",e=>setPerformanceFocus(e.target.value));
+  window.__pastelaria={startFrying,buyStock,updateBuyPreview,buyFryer,hireEmployee,hireDeliveryAssistant,trainTeam,expandStorage,advertise,buySuggested,setPastelPrice,setShopName,setPerformanceFocus,rejectOrder};
   resetGame();
 })();
 </script>
