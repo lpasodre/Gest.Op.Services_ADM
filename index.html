@@ -246,8 +246,14 @@
   function normalizeDrinkPrice(v){ const n=Number(String(v).replace(",",".")); return Number.isFinite(n) ? Math.max(0,Math.round(n*100)/100) : 6 }
   function syncPastelPrices(){ ["carne","frango","queijo"].forEach(k=>PASTELS[k].price=(state.pastelPrice ?? 10)); DRINK.price=Number.isFinite(Number(state.drinkPrice)) ? Number(state.drinkPrice) : 6 }
   function priceProfile(price=(state.pastelPrice ?? 10)){
-    if(price<=6) return {tier:"muito barato",label:"Preço muito barato",demandMult:.55,cycleSatisfaction:-4,delayPenaltyMult:.80,errorPenaltyMult:.85,lostPenalty:5,message:"Preço muito barato: aumenta bastante a demanda, mas reduz muito a margem e pode diminuir a percepção de valor."};
-    if(price<=8) return {tier:"barato",label:"Preço barato",demandMult:.72,cycleSatisfaction:-2,delayPenaltyMult:.85,errorPenaltyMult:.85,lostPenalty:5,message:"Preço barato: aumenta a demanda, reduz a margem e exige mais estoque/capacidade."};
+    price=normalizePrice(price);
+    if(price>50) return {tier:"preço inviável",label:"Preço inviável",demandMult:999,cycleSatisfaction:-5,delayPenaltyMult:2.20,errorPenaltyMult:2.20,lostPenalty:16,blockDemand:true,hardCapCustomers:0,message:"Preço acima de R$ 50,00: a demanda é bloqueada, mesmo com ação de marketing."};
+    if(price>30) return {tier:"preço abusivo",label:"Preço abusivo",demandMult:999,cycleSatisfaction:-4,delayPenaltyMult:2.05,errorPenaltyMult:2.05,lostPenalty:15,blockDemand:false,hardCapCustomers:1,message:"Preço acima de R$ 30,00: regra de ouro da simulação, pode aparecer no máximo 1 cliente eventual no ciclo."};
+    if(price<10){
+      const exponentialBoost=Math.pow(10/Math.max(price,.50),1.35);
+      const mult=clamp(1/exponentialBoost,.18,.88);
+      return {tier:"preço promocional",label:"Preço promocional",demandMult:mult,cycleSatisfaction:-3,delayPenaltyMult:.82,errorPenaltyMult:.85,lostPenalty:5,message:"Preço abaixo de R$ 10,00: a demanda aumenta de forma exponencial, pressionando estoque, fila, fritadeira e margem."};
+    }
     if(price<=11) return {tier:"medio",label:"Preço médio",demandMult:.95,cycleSatisfaction:1,delayPenaltyMult:1,errorPenaltyMult:1,lostPenalty:7,message:"Preço médio: boa demanda, boa satisfação e margem equilibrada."};
     if(price<=14) return {tier:"caro",label:"Preço caro",demandMult:1.35,cycleSatisfaction:0,delayPenaltyMult:1.35,errorPenaltyMult:1.35,lostPenalty:10,message:"Preço caro: demanda menor e cliente mais sensível a atraso, erro ou pedido incompleto."};
     if(price<=20) return {tier:"muito caro",label:"Preço muito caro",demandMult:1.80,cycleSatisfaction:-1,delayPenaltyMult:1.60,errorPenaltyMult:1.60,lostPenalty:12,message:"Preço muito caro: demanda cai bastante e qualquer falha derruba mais a satisfação."};
@@ -329,6 +335,9 @@
     return Math.max(4,Math.round(base));
   }
   function maybeSpawnCustomer(){
+    const profile=priceProfile();
+    if(profile.blockDemand) return;
+    if(Number.isFinite(profile.hardCapCustomers) && state.stats.arrived>=profile.hardCapCustomers) return;
     const total = (state.activeCustomer?1:0)+state.customerQueue.length;
     if(total>=MAX_CUSTOMERS_ON_SCREEN) return;
     state.nextSpawnIn--;
@@ -357,7 +366,7 @@
     const correct = sameOrder(typed,c.order);
     if(!correct){state.stats.errors++; state.satisfaction=clamp(state.satisfaction-5,0,100); log(`Comanda #${pad(c.orderNo)} registrada diferente do pedido do cliente.`,"bad")}
     reserveOrder(typed);
-    const ticket={id:state.nextTicketId++,orderNo:c.orderNo,customerId:c.id,customerColor:c.color,order:typed,expected:c.order,correctlyRegistered:correct,createdAt:Date.now(),status:"fila"};
+    const ticket={id:state.nextTicketId++,orderNo:c.orderNo,customerId:c.id,customerColor:c.color,order:typed,expected:c.order,correctlyRegistered:correct,createdAt:Date.now(),status:"fila",pastelPrice:PASTELS[typed.pastel].price,drinkPrice:typed.drink?DRINK.price:0,priceTier:priceProfile(PASTELS[typed.pastel].price).tier};
     state.ticketQueue.push(ticket); state.deliveryCustomers.push(c); state.stats.registered++; state.stats.maxProductionQueue=Math.max(state.stats.maxProductionQueue,state.ticketQueue.length);
     log(`Comanda #${pad(c.orderNo)} enviada para produção: ${orderText(typed)}. Insumos reservados.`, correct?"good":"warn");
     state.activeCustomer=state.customerQueue.shift()||null; clearMachine(); render();
@@ -415,11 +424,11 @@
     const tIdx=state.readyOrders.findIndex(t=>t.id===Number(ticketId)); if(tIdx<0) return;
     const cIdx=state.deliveryCustomers.findIndex(c=>c.id===Number(customerId)); if(cIdx<0) return;
     const ticket=state.readyOrders[tIdx], customer=state.deliveryCustomers[cIdx];
-    const profile=priceProfile();
+    const profile=priceProfile(ticket.pastelPrice ?? state.pastelPrice);
     if(ticket.customerId!==customer.id){state.stats.errors++; state.satisfaction=clamp(state.satisfaction-Math.round(8*profile.errorPenaltyMult),0,100); customer.mood="😠"; log(`Entrega errada: #${pad(ticket.orderNo)} era do cliente ${ticket.customerColor}, não do cliente ${customer.color}.`,"bad"); render(); return}
     state.readyOrders.splice(tIdx,1); state.deliveryCustomers.splice(cIdx,1); selectedReadyId=null;
     const wait=(Date.now()-customer.bornAt)/1000; const readyWait=(Date.now()-(ticket.readyAt||Date.now()))/1000; state.stats.totalWait+=wait; state.stats.readyWaitTotal+=readyWait;
-    let revenue = PASTELS[ticket.order.pastel].price + (ticket.order.drink?DRINK.price:0);
+    let revenue = Number(ticket.pastelPrice ?? PASTELS[ticket.order.pastel].price) + (ticket.order.drink?Number(ticket.drinkPrice ?? DRINK.price):0);
     state.cash += revenue; state.stats.revenue += revenue; state.stats.served++; state.stats.sold[ticket.order.pastel]++; if(ticket.order.drink) state.stats.sold.bebida++;
     if(auto) state.stats.autoDelivered++; else state.stats.manualDelivered++;
     if(!ticket.correctlyRegistered){state.satisfaction=clamp(state.satisfaction-Math.round(10*profile.errorPenaltyMult),0,100); log(`Cliente ${customer.color} recebeu a comanda #${pad(ticket.orderNo)}, mas o pedido estava diferente do solicitado.`,"bad")}
@@ -511,6 +520,26 @@
     if(currentReport) currentReport.continuationCode=code;
     return code;
   }
+  function csvCell(value){ return `"${String(value??"").replace(/"/g,'""')}"`; }
+  function downloadContinuationCSV(){
+    const code=updateContinuationCodeDisplay();
+    const cycle=currentReport ? currentReport.cycle : state.cycle;
+    const rows=[
+      ["campo","valor"],
+      ["jogo","Pastelaria em Operação"],
+      ["pastelaria",state.shopName||"Pastelaria do Vale"],
+      ["ciclo_para_continuar",state.cycle],
+      ["gerado_em",new Date().toLocaleString("pt-BR")],
+      ["codigo_continuacao",code]
+    ];
+    const csv=rows.map(row=>row.map(csvCell).join(";")).join("\n");
+    const blob=new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8"});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement("a");
+    a.href=url; a.download=`codigo_continuacao_pastelaria_ciclo_${cycle}.csv`;
+    document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+  }
   function loadContinuationCode(){
     try{
       const loaded=decodeContinuationCode($("continuationInput").value);
@@ -532,7 +561,7 @@
     $("reportTitle").textContent=`Relatório do ciclo ${r.cycle} — ${r.shopName}`; $("eventText").textContent=`Evento do ciclo: ${r.event} — ${r.eventDesc}`;
     const items=[["Clientes que chegaram",r.arrived],["Pedidos registrados",r.registered],["Pedidos recusados",r.refused],["Preço do pastel",fmtMoney(r.pastelPrice)],["Preço do refrigerante/suco",fmtMoney((r.drinkPrice ?? 6))],["Estratégia de preço",r.priceTier],["Prioridade operacional",PERFORMANCE_LABELS[r.performanceFocus]||"Custo"],["Clientes atendidos",r.served],["Clientes perdidos",r.lost],["Entregas manuais",r.manualDelivered],["Entregas do auxiliar",r.autoDelivered],["Erros",r.errors],["Receita",fmtMoney(r.revenue)],["(-) Custos operacionais",fmtMoney(r.totalCosts)],["(-) Investimentos",fmtMoney(r.cycleInvestment)],["Resultado antes dos impostos",fmtMoney(r.preTaxResult)],["(-) Impostos projetados 20%",fmtMoney(r.projectedTax)],["Lucro líquido projetado",fmtMoney(r.netProjected)],["Caixa final do jogo",fmtMoney(r.cash)],["Espera média",`${Math.round(r.avgWait)}s`],["Satisfação",`${Math.round(r.satisfaction)}/100`],["Pontuação",`${r.score}/100`]];
     $("reportGrid").innerHTML=items.map(([l,v])=>`<div class="report-item"><div class="label">${l}</div><div class="value">${v}</div></div>`).join("");
-    $("diagnosticText").innerHTML=diagnosticHTML(r); currentReport=r; r.continuationCode=generateContinuationCode(); document.querySelectorAll(".continuation-code-panel").forEach(el=>el.remove()); $("diagnosticText").insertAdjacentHTML("afterend", `<div class="panel continuation-code-panel" style="margin-top:12px"><h2>Código de Continuação da Simulação</h2><div class="tiny">Guarde este código para continuar o jogo em outro momento. Se fizer compras ou melhorias antes de imprimir, o código será atualizado no PDF.</div><textarea id="continuationCodeBox" readonly style="width:100%;min-height:92px;margin-top:8px;border:3px solid var(--dark);border-radius:8px;padding:8px;font-family:'Courier New',monospace">${r.continuationCode}</textarea><div class="btn-row"><button onclick="navigator.clipboard&&navigator.clipboard.writeText(document.getElementById('continuationCodeBox').value)">Copiar código</button></div></div>`); $("printArea").innerHTML=printReportHTML(r); $("reportModal").classList.add("show"); buildPricing(); buildPurchases(); buildUpgrades();
+    $("diagnosticText").innerHTML=diagnosticHTML(r); currentReport=r; r.continuationCode=generateContinuationCode(); document.querySelectorAll(".continuation-code-panel").forEach(el=>el.remove()); $("diagnosticText").insertAdjacentHTML("afterend", `<div class="panel continuation-code-panel" style="margin-top:12px"><h2>Código de Continuação da Simulação</h2><div class="tiny">Guarde este código para continuar o jogo em outro momento. Ele fica disponível apenas nesta tela e não sairá no relatório em PDF. Se fizer compras ou melhorias, copie novamente ou baixe o CSV atualizado.</div><textarea id="continuationCodeBox" readonly style="width:100%;min-height:92px;margin-top:8px;border:3px solid var(--dark);border-radius:8px;padding:8px;font-family:'Courier New',monospace">${r.continuationCode}</textarea><div class="btn-row"><button onclick="navigator.clipboard&&navigator.clipboard.writeText(document.getElementById('continuationCodeBox').value)">Copiar código</button><button class="btn-blue" onclick="downloadContinuationCSV()">Baixar código em CSV</button></div></div>`); $("printArea").innerHTML=printReportHTML(r); $("reportModal").classList.add("show"); buildPricing(); buildPurchases(); buildUpgrades();
   }
   function performanceHTML(r){
     const entries=Object.entries(r.performance||{}); if(!entries.length) return "";
@@ -551,7 +580,7 @@
       ["Evento",`${r.event} — ${r.eventDesc}`],["Clientes que chegaram",r.arrived],["Pedidos registrados",r.registered],["Pedidos recusados",r.refused],["Preço do pastel",fmtMoney(r.pastelPrice)],["Preço do refrigerante/suco",fmtMoney((r.drinkPrice ?? 6))],["Estratégia de preço",r.priceTier],["Prioridade operacional",PERFORMANCE_LABELS[r.performanceFocus]||"Custo"],["Clientes atendidos",r.served],["Clientes perdidos",r.lost],["Entregas manuais",r.manualDelivered],["Entregas do auxiliar",r.autoDelivered],["Erros",r.errors],["Receita",fmtMoney(r.revenue)],["(-) Custos operacionais",fmtMoney(r.totalCosts)],["(-) Investimentos",fmtMoney(r.cycleInvestment)],["Resultado antes dos impostos",fmtMoney(r.preTaxResult)],["(-) Impostos projetados — 20%",fmtMoney(r.projectedTax)],["Lucro líquido projetado",fmtMoney(r.netProjected)],["Caixa final do jogo",fmtMoney(r.cash)],["Espera média",`${Math.round(r.avgWait)}s`],["Satisfação",`${Math.round(r.satisfaction)}/100`],["Gargalo",r.bottleneck],["Pontuação",`${r.score}/100`]
     ];
     const stockRows=Object.keys(r.stock).map(k=>`<tr><td>${STOCK_NAMES[k]}</td><td>${r.consumed[k]||0}</td><td>${r.stock[k]}/${r.capacity[k]}</td><td>${r.reserved && r.reserved[k] ? r.reserved[k] : 0}</td><td>${r.spoilage[k]||0}</td></tr>`).join("");
-    return `<h1>${r.shopName} — Relatório do ciclo ${r.cycle}</h1><div class="small">Pastelaria em Operação — Sistema desenvolvido para a disciplina Gestão de Operações e Serviços, Professor Me. Luan Sodré da UNIVALE.</div><h2>Demonstração gerencial do ciclo</h2><table><tbody>${rows.map(([a,b])=>`<tr><th>${a}</th><td>${b}</td></tr>`).join("")}</tbody></table><h2>Estoque, consumo e desperdício</h2><table><thead><tr><th>Item</th><th>Consumido</th><th>Estoque final / capacidade</th><th>Reservado</th><th>Desperdício</th></tr></thead><tbody>${stockRows}</tbody></table><h2>Diagnóstico gerencial</h2>${diagnosticHTML(r)}<h2>Código de Continuação da Simulação</h2><div class="small" style="word-break:break-all">${r.continuationCode||generateContinuationCode()}</div><div class="small">Sugestão de uso: peça que os alunos justifiquem quais compras e melhorias fariam antes do próximo ciclo.</div>`;
+    return `<h1>${r.shopName} — Relatório do ciclo ${r.cycle}</h1><div class="small">Pastelaria em Operação — Sistema desenvolvido para a disciplina Gestão de Operações e Serviços, Professor Me. Luan Sodré da UNIVALE.</div><h2>Demonstração gerencial do ciclo</h2><table><tbody>${rows.map(([a,b])=>`<tr><th>${a}</th><td>${b}</td></tr>`).join("")}</tbody></table><h2>Estoque, consumo e desperdício</h2><table><thead><tr><th>Item</th><th>Consumido</th><th>Estoque final / capacidade</th><th>Reservado</th><th>Desperdício</th></tr></thead><tbody>${stockRows}</tbody></table><h2>Diagnóstico gerencial</h2>${diagnosticHTML(r)}<div class="small">Sugestão de uso: peça que os alunos justifiquem quais compras e melhorias fariam antes do próximo ciclo.</div>`;
   }
   function printReport(){ if(!currentReport) return; currentReport.continuationCode=updateContinuationCodeDisplay(); $("printArea").innerHTML=printReportHTML(currentReport); window.print(); }
   function mostSoldPastel(sold){ let best=null, val=0; ["carne","frango","queijo"].forEach(k=>{if(sold[k]>val){best=k;val=sold[k]}}); return best }
